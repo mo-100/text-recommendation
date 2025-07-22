@@ -1,0 +1,10 @@
+pydantic
+faiss-cpu
+networkx
+spacy
+scikit-learn
+sentence_transformers
+bertopic
+hdbscan
+umap
+keybert
