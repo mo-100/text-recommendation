@@ -2,3 +2,5 @@ sentence_transformers
 scikit-learn
 hnswlib
 numpy
+umap-learn
+datasets
