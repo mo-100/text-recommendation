@@ -16,18 +16,18 @@ def unpack_scores(scores: dict[int, float]) -> tuple[list[int], list[float]]:
     return indices, distances
 
 
-def skip_history(scores: dict[int, float], history: list[int]) -> dict[int, float]:
+def skip_ids(scores: dict[int, float], skip: list[int]) -> dict[int, float]:
     """
     Remove items from scores that are present in the user's history.
 
     Args:
         scores (dict[int, float]): Dictionary of scores where keys are item IDs and values are their scores.
-        history (list[int]): List of item IDs in the user's history.
+        skip (list[int]): List of item IDs to skip.
 
     Returns:
-        dict[int, float]: Filtered dictionary of scores excluding items in the user's history.
+        dict[int, float]: Filtered dictionary of scores excluding items in the skip list.
     """
-    return {k: v for k, v in scores.items() if k not in history}
+    return {k: v for k, v in scores.items() if k not in skip}
 
 
 def take_top_k(scores: dict[int, float], k: int) -> dict[int, float]:
@@ -48,11 +48,13 @@ def take_top_k(scores: dict[int, float], k: int) -> dict[int, float]:
 
 def take_random(scores: dict[int, float], k: int) -> dict[int, float]:
     """
-    Remove items from scores randomly.
+    Select k random items from scores.
 
     Args:
         scores (dict[int, float]): Dictionary of scores where keys are item IDs and values are their scores.
         k (int): Number of items to return.
+    Returns:
+        dict[int, float]: Dictionary containing k randomly selected items and their scores.
     """
     sampled = random.sample(list(scores.items()), k)
     return {index: distance for index, distance in sampled}
